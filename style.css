@@ -1,4 +1,3 @@
-/* ===== Global Reset ===== */
 * {
   margin: 0;
   padding: 0;
@@ -12,17 +11,16 @@ body {
   scroll-behavior: smooth;
 }
 
-/* ===== Navbar ===== */
+/* ===== NAVBAR ===== */
 header {
   position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255,255,255,0.9);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   z-index: 1000;
-  margin-top: 40px;
 }
 
 .navbar {
@@ -56,13 +54,6 @@ header {
   color: #007bff;
 }
 
-.nav-links a.active {
-  color: #007bff;
-  font-weight: 600;
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 2px;
-}
-
 .menu-toggle {
   display: none;
   font-size: 1.8rem;
@@ -76,55 +67,87 @@ header {
   cursor: pointer;
 }
 
-/* ===== Announcement Bar ===== */
+/* ===== Announcement Bar (Premium Style) ===== */
 .announcement-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(90deg, #111, #222);
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364); /* Elegant blue gradient */
   color: #f5f5f5;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 8px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 0;
   text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  opacity: 0;
-  animation: fadeIn 1.5s ease forwards;
-  z-index: 2000;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.announcement-bar span {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
-               0 0 20px rgba(255, 255, 255, 0.4);
+/* Scrolling glowing text */
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 14s linear infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+               0 0 20px rgba(0, 255, 255, 0.5),
+               0 0 40px rgba(0, 150, 255, 0.3);
+  letter-spacing: 0.5px;
+  cursor: default;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
+/* Smooth scroll effect */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
+/* Pause scroll on hover */
+.marquee:hover {
+  animation-play-state: paused;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.8),
+               0 0 40px rgba(0, 255, 255, 0.4);
+}
+
+/* 🌙 Dark mode adjustment */
 body.dark-mode .announcement-bar {
-  background: linear-gradient(90deg, #f5f5f5, #e0e0e0);
+  background: linear-gradient(90deg, #ece9e6, #ffffff);
   color: #111;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-body.dark-mode .announcement-bar span {
+body.dark-mode .marquee {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.3),
                0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-.announcement-bar marquee:hover {
-  animation-play-state: paused;
+/* 🌎 Glow animation for Earth icon */
+.marquee::after {
+  content: " 🌎";
+  display: inline-block;
+  animation: glowEarth 3s ease-in-out infinite alternate;
 }
 
-@media (max-width: 768px) {
-  .announcement-bar marquee {
-    scrollamount: 3;
+@keyframes glowEarth {
+  from {
+    filter: drop-shadow(0 0 3px cyan);
+  }
+  to {
+    filter: drop-shadow(0 0 12px cyan);
   }
 }
 
-/* ===== Hero ===== */
+/* 📱 Mobile responsiveness */
+@media (max-width: 768px) {
+  .marquee {
+    animation-duration: 18s;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== HERO ===== */
 .hero {
   position: relative;
   height: 100vh;
@@ -133,7 +156,7 @@ body.dark-mode .announcement-bar span {
   justify-content: center;
   text-align: center;
   background: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  color: #fff;
+  color: white;
   overflow: hidden;
 }
 
@@ -181,7 +204,7 @@ body.dark-mode .announcement-bar span {
 
 .cta-btn {
   background: linear-gradient(90deg, #00e6ff, #007bff);
-  color: #fff;
+  color: white;
   padding: 12px 30px;
   border-radius: 30px;
   font-weight: 600;
@@ -195,9 +218,16 @@ body.dark-mode .announcement-bar span {
   box-shadow: 0 0 20px rgba(0, 230, 255, 0.9);
 }
 
+/* Animations */
 @keyframes fadeInUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
@@ -205,12 +235,17 @@ body.dark-mode .announcement-bar span {
   to { opacity: 1; }
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-  .hero-title { font-size: 2.2rem; }
-  .hero-subtitle { font-size: 1rem; }
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
 }
 
-/* ===== Services ===== */
+/* ===== SERVICES ===== */
 .services {
   text-align: center;
   padding: 100px 10%;
@@ -233,7 +268,7 @@ body.dark-mode .announcement-bar span {
 
 .service-card {
   width: 300px;
-  background: #fff;
+  background: white;
   border-radius: 12px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   padding: 30px;
@@ -249,10 +284,10 @@ body.dark-mode .announcement-bar span {
   margin-bottom: 20px;
 }
 
-/* ===== Portfolio ===== */
+/* ===== PORTFOLIO ===== */
 .portfolio {
-  text-align: center;
   padding: 100px 10%;
+  text-align: center;
   opacity: 0;
   transform: translateY(40px);
   transition: all 1s ease;
@@ -295,56 +330,14 @@ body.dark-mode .announcement-bar span {
   font-weight: 600;
 }
 
-/* ===== Contact ===== */
+/* ===== CONTACT ===== */
 .contact {
   text-align: center;
   padding: 100px 10%;
   background: #f8f9fa;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.contact.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-body.dark-mode .contact h2,
-body.dark-mode .contact p {
-  color: #000;
-  transition: color 0.3s ease;
-}
-
-/* ===== Buttons ===== */
-.btn {
-  padding: 12px 28px;
-  background: #007bff;
-  color: #fff;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background: #0056b3;
-  transform: scale(1.05);
-}
-
-.btn.secondary {
-  background: #222;
-}
-
-.btn.secondary:hover {
-  background: #007bff;
-}
-
-a.btn, a.cta-btn {
-  text-decoration: none !important;
-}
-
-/* ===== Footer ===== */
+/* ===== FOOTER ===== */
 footer {
   text-align: center;
   padding: 25px;
@@ -352,19 +345,33 @@ footer {
   color: #ddd;
 }
 
-/* ===== Dark Mode ===== */
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes slideDown {
+  from {opacity: 0; transform: translateY(-30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInUp {
+  from {opacity: 0; transform: translateY(30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* ===== DARK MODE ===== */
 .dark-mode {
-  background: #121212;
-  color: #fff;
+  background-color: #121212;
+  color: white;
 }
 
 .dark-mode .navbar {
-  background: rgba(18, 18, 18, 0.9);
+  background: rgba(18,18,18,0.9);
 }
 
-.dark-mode .service-card,
+.dark-mode .service-card, 
 .dark-mode .project-card {
-  background: #1e1e1e;
+  background-color: #1e1e1e;
   color: #eee;
 }
 
@@ -372,9 +379,11 @@ footer {
   background: #000;
 }
 
-/* ===== Responsive ===== */
+/* ===== RESPONSIVE MENU ===== */
 @media (max-width: 768px) {
-  .menu-toggle { display: block; }
+  .menu-toggle {
+    display: block;
+  }
 
   .nav-links {
     display: none;
@@ -388,13 +397,129 @@ footer {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
-  .nav-links.active { display: flex; }
+  .nav-links.active {
+    display: flex;
+  }
 
-  .hero h1 { font-size: 2rem; }
+  .hero h1 {
+    font-size: 2rem;
+  }
 
-  .service-container,
-  .projects {
+  .service-container, .projects {
     flex-direction: column;
     align-items: center;
   }
-               }
+  /* ===== Active Link Highlight ===== */
+  
+.nav-links a.active {
+  color: #007bff;
+  font-weight: 600;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 2px;
+}
+}
+/* Fade-up animation for Contact Section */
+.contact {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.contact.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Fix contact text color in dark mode */
+body.dark-mode .contact h2,
+body.dark-mode .contact p {
+  color: #000; /* black text even in dark mode */
+  transition: color 0.3s ease;
+}
+
+/* Restore other buttons styling */
+.btn {
+  padding: 12px 28px;
+  background: #007bff;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Secondary button (like Get Started) */
+.btn.secondary {
+  background: #222;
+}
+
+.btn.secondary:hover {
+  background: #007bff;
+}
+
+/* Make sure buttons have no underline */
+a.btn, a.cta-btn {
+  text-decoration: none !important;
+}
+
+/* ===== Announcement Bar ===== */
+.announcement-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #111, #222);
+  color: #f5f5f5;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 0;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  z-index: 2000; /* ensure it stays above navbar */
+}
+
+/* Glow effect for marquee text */
+.announcement-bar span {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6),
+               0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Dark mode support */
+body.dark-mode .announcement-bar {
+  background: linear-gradient(90deg, #f5f5f5, #e0e0e0);
+  color: #111;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .announcement-bar span {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.3),
+               0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: Marquee hover pause */
+.announcement-bar marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Responsive speed adjustment for mobile */
+@media (max-width: 768px) {
+  .announcement-bar marquee {
+    scrollamount: 3;
+  }
+}
+
+/* Fix header position since announcement bar takes top space */
+header {
+  margin-top: 40px;
+    }
